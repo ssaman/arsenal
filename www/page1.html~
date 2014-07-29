@@ -1,0 +1,28 @@
+<ons-page class="center">
+	<div id="wrapper">
+		<ul id="reportList" class="icon-list"></ul>
+	</div>
+    <ons-navigator-toolbar title="Page1"  right-button-icon="fa fa-lg fa-angle-right"
+                           on-right-button-click="ons.navigator.pushPage('page2.html')">
+    </ons-navigator-toolbar>
+</ons-page>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+document.addEventListener("deviceready", onDeviceReady, false);
+// Cordova is ready
+//
+function onDeviceReady() {
+app.initialize();
+var db = window.sqlitePlugin.openDatabase({name: "my.db"});
+navigator.notification.alert('Sorry, incorrect');
+var sql = "SELECT nombre FROM monografia order by nombre";
+db.executeSql(sql, [id], llenarLista);
+}
+function llenarLista(tx, results) {
+var len = results.rows.length;
+for (var i=0; i<len; i++) {
+var employee = results.rows.item(i);
+	$('#reportList').append('<li><a href="page1.html?id=' + employee.nombre + '</span></a></li>');
+}
+</script>  
